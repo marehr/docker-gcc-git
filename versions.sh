@@ -47,7 +47,8 @@ for version in "${versions[@]}"; do
 	debianSuite="${debianSuites[$version]:-$defaultDebianSuite}"
 
 	compression=
-	for tryCompression in xz bz2 gz; do
+	# for tryCompression in xz bz2 gz; do
+	for tryCompression in gz; do
 		if \
 			wget --quiet --spider "$packagesUrl/gcc-$fullVersion/gcc-$fullVersion.tar.$tryCompression" \
 			|| wget --quiet --spider "$packagesUrl/$fullVersion/gcc-$fullVersion.tar.$tryCompression" \

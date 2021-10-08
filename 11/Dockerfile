@@ -76,12 +76,12 @@ RUN set -ex; \
 		return 1; \
 	}; \
 	\
-	_fetch "gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.xz.sig" 'gcc.tar.xz.sig'; \
-	_fetch "gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.xz" 'gcc.tar.xz'; \
-	gpg --batch --verify gcc.tar.xz.sig gcc.tar.xz; \
+	_fetch "gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.gz.sig" 'gcc.tar.gz.sig'; \
+	_fetch "gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.gz" 'gcc.tar.gz'; \
+	gpg --batch --verify gcc.tar.gz.sig gcc.tar.gz; \
 	mkdir -p /usr/src/gcc; \
-	tar -xf gcc.tar.xz -C /usr/src/gcc --strip-components=1; \
-	rm gcc.tar.xz*; \
+	tar -xf gcc.tar.gz -C /usr/src/gcc --strip-components=1; \
+	rm gcc.tar.gz*; \
 	\
 	cd /usr/src/gcc; \
 	\

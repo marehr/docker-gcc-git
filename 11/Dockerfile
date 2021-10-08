@@ -41,14 +41,9 @@ RUN set -ex; \
 	done
 
 # https://gcc.gnu.org/mirrors.html
+# use github's gcc-mirror instead of FTP server for latest source
 ENV GCC_MIRRORS \
-		https://ftpmirror.gnu.org/gcc \
-		https://mirrors.kernel.org/gnu/gcc \
-		https://bigsearcher.com/mirrors/gcc/releases \
-		http://www.netgull.com/gcc/releases \
-		https://ftpmirror.gnu.org/gcc \
-# only attempt the origin FTP as a mirror of last resort
-		ftp://ftp.gnu.org/gnu/gcc
+	https://github.com/gcc-mirror/gcc/archive/refs/heads/releases/
 
 # Last Modified: 2021-07-28
 ENV GCC_VERSION 11.2.0
@@ -76,9 +71,10 @@ RUN set -ex; \
 		return 1; \
 	}; \
 	\
-	_fetch "gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.gz.sig" 'gcc.tar.gz.sig'; \
-	_fetch "gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.gz" 'gcc.tar.gz'; \
-	gpg --batch --verify gcc.tar.gz.sig gcc.tar.gz; \
+	#_fetch "gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.gz.sig" 'gcc.tar.gz.sig'; \
+	gccMajorVersion=$(echo $GCC_VERSION | cut -d. -f1); \
+	_fetch "gcc-${gccMajorVersion}.tar.gz" 'gcc.tar.gz'; \
+	#gpg --batch --verify gcc.tar.gz.sig gcc.tar.gz; \
 	mkdir -p /usr/src/gcc; \
 	tar -xf gcc.tar.gz -C /usr/src/gcc --strip-components=1; \
 	rm gcc.tar.gz*; \

@@ -125,7 +125,9 @@ RUN set -ex; \
 	/usr/src/gcc/configure \
 		--build="$gnuArch" \
 		--disable-multilib \
-		--enable-languages=c,c++,fortran,go \
+		# --enable-languages=c,c++,fortran,go \
+		--enable-languages=c,c++ \
+		--disable-bootstrap \
 		$extraConfigureArgs \
 	; \
 	make -j "$(nproc)"; \

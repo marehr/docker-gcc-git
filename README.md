@@ -1,3 +1,35 @@
+# https://github.com/marehr/docker-gcc-git
+
+This is a fork of https://github.com/docker-library/gcc which uses the latest git source of any active major gcc release (including trunk).
+
+This version will download the latest available source from https://github.com/gcc-mirror/gcc/ and builds it.
+
+For example gcc-10 would be build from the release branch
+[releases/gcc-10](https://github.com/gcc-mirror/gcc/tree/releases/gcc-10).
+
+How to build and push to the registry?
+
+```bash
+# Update all the Docker sources
+# calls ./versions.sh and ./apply-templates.sh
+./update.sh
+
+version="trunk" # e.g. "trunk", "8", "9", "10", "11", etc... (basically any folder in this repo)
+
+# Note that --no-cache is important as otherwise Docker would think that it doesn't need to build
+# anything since the  Dockerfile is unchanged. But of course the internally used git source might
+# have changed.
+sudo docker build $version --tag ghcr.io/marehr/gcc-git:$version-latest --no-cache
+
+sudo docker push ghcr.io/marehr/gcc-git:$version-latest
+```
+
+Follow the [instruction](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) how to login into the registry.
+
+Original Description:
+
+-----
+
 # https://github.com/docker-library/gcc
 
 ## Maintained by: [the Docker Community](https://github.com/docker-library/gcc)

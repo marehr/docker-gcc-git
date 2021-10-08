@@ -6,6 +6,8 @@
 
 FROM buildpack-deps:bullseye
 
+LABEL org.opencontainers.image.source https://github.com/marehr/docker-gcc-git
+
 RUN set -ex; \
 	if ! command -v gpg > /dev/null; then \
 		apt-get update; \

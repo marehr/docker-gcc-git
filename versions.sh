@@ -62,6 +62,9 @@ for version in "${versions[@]}"; do
 		exit 1
 	fi
 
+	branch="releases/gcc-${version}"
+	export branch
+
 	echo "$version: $fullVersion ($lastModified vs $eolDate); $debianSuite, $compression"
 
 	export version fullVersion lastModified eolDate debianSuite compression
@@ -72,6 +75,7 @@ for version in "${versions[@]}"; do
 			eol: env.eolDate,
 			debian: env.debianSuite,
 			compression: env.compression,
+			branch: env.branch,
 		}
 	')"
 done

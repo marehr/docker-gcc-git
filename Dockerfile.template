@@ -37,7 +37,7 @@ RUN set -ex; \
 # https://gcc.gnu.org/mirrors.html
 # use github's gcc-mirror instead of FTP server for latest source
 ENV GCC_MIRRORS \
-	https://github.com/gcc-mirror/gcc/archive/refs/heads/releases/
+	https://github.com/gcc-mirror/gcc/archive/refs/heads/
 
 # Last Modified: {{ .lastModified }}
 ENV GCC_VERSION {{ .version }}
@@ -66,8 +66,7 @@ RUN set -ex; \
 	}; \
 	\
 	#_fetch "gcc-$GCC_VERSION/gcc-$GCC_VERSION.tar.{{ .compression }}.sig" 'gcc.tar.{{ .compression }}.sig'; \
-	gccMajorVersion=$(echo $GCC_VERSION | cut -d. -f1); \
-	_fetch "gcc-${gccMajorVersion}.tar.{{ .compression }}" 'gcc.tar.{{ .compression }}'; \
+	_fetch "{{ .branch }}.tar.{{ .compression }}" 'gcc.tar.{{ .compression }}'; \
 	#gpg --batch --verify gcc.tar.{{ .compression }}.sig gcc.tar.{{ .compression }}; \
 	mkdir -p /usr/src/gcc; \
 	tar -xf gcc.tar.{{ .compression }} -C /usr/src/gcc --strip-components=1; \

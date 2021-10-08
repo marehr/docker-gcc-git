@@ -1,5 +1,6 @@
 {
   "10": {
+    "branch": "releases/gcc-10",
     "compression": "gz",
     "debian": "buster",
     "eol": "2022-10-08",
@@ -7,6 +8,7 @@
     "version": "10.3.0"
   },
   "11": {
+    "branch": "releases/gcc-11",
     "compression": "gz",
     "debian": "bullseye",
     "eol": "2023-01-28",
@@ -14,6 +16,7 @@
     "version": "11.2.0"
   },
   "8": {
+    "branch": "releases/gcc-8",
     "compression": "gz",
     "debian": "buster",
     "eol": "2022-11-14",
@@ -21,6 +24,7 @@
     "version": "8.5.0"
   },
   "9": {
+    "branch": "releases/gcc-9",
     "compression": "gz",
     "debian": "buster",
     "eol": "2022-12-01",

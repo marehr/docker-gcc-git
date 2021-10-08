@@ -33,6 +33,16 @@ eols=()
 dateFormat='%Y-%m-%d'
 
 for version in "${versions[@]}"; do
+	if [ "$version" == "trunk" ]; then
+		# trunk case
+		fullVersion="trunk"
+		lastModified="$(date +"$dateFormat")"
+		eolDate="$(date -d "$lastModified + $eolPeriod" +"$dateFormat")"
+		debianSuite="$defaultDebianSuite"
+		compression="gz"
+		branch="trunk"
+	else
+		# original versions.sh - start
 	fullVersion="$(grep -E '<a href="(gcc-)?'"$version." <<<"$packages" | sed -r 's!.*<a href="(gcc-)?([^"/]+)/?".*!\2!' | sort -V | tail -1)"
 	lastModified="$(grep -Em1 '<a href="(gcc-)?'"$fullVersion"'/"' <<<"$packages" | awk -F '  +' '{ print $2 }')"
 	lastModified="$(date -d "$lastModified" +"$dateFormat")"
@@ -62,7 +72,9 @@ for version in "${versions[@]}"; do
 		exit 1
 	fi
 
+		# original versions.sh - end
 	branch="releases/gcc-${version}"
+	fi
 	export branch
 
 	echo "$version: $fullVersion ($lastModified vs $eolDate); $debianSuite, $compression"
